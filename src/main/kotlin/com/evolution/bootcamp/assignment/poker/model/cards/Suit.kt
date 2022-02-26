@@ -4,6 +4,13 @@ import com.evolution.bootcamp.assignment.poker.model.Parser
 
 sealed class Suit {
 
+    override fun toString(): String = when (this) {
+        Clubs -> "c"
+        Diamonds -> "d"
+        Hearts -> "h"
+        Spades -> "s"
+    }
+
     companion object : Parser<Char, Suit> {
 
         override fun from(value: Char) = when (value) {

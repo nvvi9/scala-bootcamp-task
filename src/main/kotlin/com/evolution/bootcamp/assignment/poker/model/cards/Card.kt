@@ -1,6 +1,5 @@
 package com.evolution.bootcamp.assignment.poker.model.cards
 
-import com.evolution.bootcamp.assignment.poker.Try
 import com.evolution.bootcamp.assignment.poker.model.Parser
 
 data class Card(val rank: Rank, val suit: Suit) {
