@@ -1,14 +1,14 @@
 package com.evolution.bootcamp.assignment.poker.model.cards
 
-import com.evolution.bootcamp.assignment.poker.model.Parser
+import com.evolution.bootcamp.assignment.poker.utils.Parser
 
-sealed class Rank(private val weakerThen: Set<Rank>) : Comparable<Rank> {
+sealed class Rank(private val strength: Int) : Comparable<Rank> {
 
     override fun compareTo(other: Rank): Int =
         when {
-            this == other -> 0
-            weakerThen.contains(other) -> -1
-            weakerThen.isEmpty() || !weakerThen.contains(other) -> 1
+            strength == other.strength -> 0
+            strength < other.strength -> -1
+            strength > other.strength -> 1
             else -> throw IllegalStateException()
         }
 
@@ -28,11 +28,7 @@ sealed class Rank(private val weakerThen: Set<Rank>) : Comparable<Rank> {
         Ace -> "A"
     }
 
-    operator fun minus(rank: Rank): Int = rank.weakerThen
-        .indexOfFirst { it == this }
-        .takeIf { it != -1 }
-        ?.let { it + 1 }
-        ?: -(weakerThen.indexOfFirst { it == rank } + 1)
+    operator fun minus(rank: Rank): Int = strength - rank.strength
 
     companion object : Parser<Char, Rank> {
 
@@ -55,16 +51,16 @@ sealed class Rank(private val weakerThen: Set<Rank>) : Comparable<Rank> {
     }
 }
 
-object Two : Rank(setOf(Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace))
-object Three : Rank(setOf(Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace))
-object Four : Rank(setOf(Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace))
-object Five : Rank(setOf(Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace))
-object Six : Rank(setOf(Seven, Eight, Nine, Ten, Jack, Queen, King, Ace))
-object Seven : Rank(setOf(Eight, Nine, Ten, Jack, Queen, King, Ace))
-object Eight : Rank(setOf(Nine, Ten, Jack, Queen, King, Ace))
-object Nine : Rank(setOf(Ten, Jack, Queen, King, Ace))
-object Ten : Rank(setOf(Jack, Queen, King, Ace))
-object Jack : Rank(setOf(Queen, King, Ace))
-object Queen : Rank(setOf(King, Ace))
-object King : Rank(setOf(Ace))
-object Ace : Rank(setOf())
+object Two : Rank(0)
+object Three : Rank(1)
+object Four : Rank(2)
+object Five : Rank(3)
+object Six : Rank(4)
+object Seven : Rank(5)
+object Eight : Rank(6)
+object Nine : Rank(7)
+object Ten : Rank(8)
+object Jack : Rank(9)
+object Queen : Rank(10)
+object King : Rank(11)
+object Ace : Rank(12)

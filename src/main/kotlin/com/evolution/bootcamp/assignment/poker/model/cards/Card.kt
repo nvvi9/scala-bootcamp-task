@@ -1,8 +1,11 @@
 package com.evolution.bootcamp.assignment.poker.model.cards
 
-import com.evolution.bootcamp.assignment.poker.model.Parser
+import com.evolution.bootcamp.assignment.poker.utils.Parser
 
-data class Card(val rank: Rank, val suit: Suit) {
+class Card private constructor(val rank: Rank, val suit: Suit) {
+
+    override fun toString(): String = "$rank$suit"
+
     companion object : Parser<String, Card> {
 
         override fun from(value: String): Card {

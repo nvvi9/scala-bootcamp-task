@@ -1,4 +1,4 @@
-package com.evolution.bootcamp.assignment.poker
+package com.evolution.bootcamp.assignment.poker.utils
 
 sealed class Try<out T> {
     data class Success<T>(val data: T) : Try<T>()

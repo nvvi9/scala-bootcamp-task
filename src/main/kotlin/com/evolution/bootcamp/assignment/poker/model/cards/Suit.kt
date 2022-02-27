@@ -1,6 +1,6 @@
 package com.evolution.bootcamp.assignment.poker.model.cards
 
-import com.evolution.bootcamp.assignment.poker.model.Parser
+import com.evolution.bootcamp.assignment.poker.utils.Parser
 
 sealed class Suit {
 

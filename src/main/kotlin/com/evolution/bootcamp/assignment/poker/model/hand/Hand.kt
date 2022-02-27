@@ -1,9 +1,9 @@
 package com.evolution.bootcamp.assignment.poker.model.hand
 
-import com.evolution.bootcamp.assignment.poker.model.Parser
 import com.evolution.bootcamp.assignment.poker.model.cards.Card
+import com.evolution.bootcamp.assignment.poker.utils.Parser
 
-data class Hand(val cards: List<Card>) {
+class Hand private constructor(val cards: List<Card>) {
 
     override fun toString(): String = cards.joinToString("") { "${it.rank}${it.suit}" }
 
